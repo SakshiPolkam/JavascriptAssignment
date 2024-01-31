@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RGB Color Picker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #colorPicker {
+      margin-bottom: 20px;
+    }
+
+    #hexCode {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="color" id="colorPicker" onchange="updateHexCode()">
+  <div id="hexCode">#000000</div>
+
+  <script>
+    function updateHexCode() {
+      const colorPicker = document.getElementById('colorPicker');
+      const hexCodeDisplay = document.getElementById('hexCode');
+      
+      const hexCode = rgbToHex(colorPicker.value);
+      hexCodeDisplay.textContent = hexCode;
+    }
+
+    function rgbToHex(rgb) {
+      // Convert RGB to hexadecimal
+      const rgbArray = rgb.match(/\d+/g);
+      const hex = '#' + rgbArray.map(value => {
+        const hexValue = parseInt(value).toString(16);
+        return hexValue.length === 1 ? '0' + hexValue : hexValue;
+      }).join('');
+      return hex.toUpperCase();
+    }
+  </script>
+</body>
+</html>
