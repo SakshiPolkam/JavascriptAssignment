@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traffic Light Simulation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #trafficLight {
+      width: 100px;
+      height: 300px;
+      background-color: #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+    }
+
+    .light {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 1px solid #000;
+    }
+
+    #timer {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    #button {
+      margin-top: 20px;
+      font-size: 16px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="trafficLight">
+    <div class="light" id="redLight"></div>
+    <div class="light" id="yellowLight"></div>
+    <div class="light" id="greenLight"></div>
+    <div id="timer">Timer: 30</div>
+  </div>
+
+  <button id="button" onclick="toggleTrafficLight()">Switch Signal</button>
+
+  <script>
+    let currentSignal = 'red';
+    let timer = 30;
+    let intervalId;
+
+    function toggleTrafficLight() {
+      clearInterval(intervalId);
+
+      if (currentSignal === 'red') {
+        currentSignal = 'green';
+      } else if (currentSignal === 'green') {
+        currentSignal = 'yellow';
+      } else if (currentSignal === 'yellow') {
+        currentSignal = 'red';
+      }
+
+      updateTrafficLight();
+      startTimer();
+    }
+
+    function updateTrafficLight() {
+      document.getElementById('redLight').style.backgroundColor = currentSignal === 'red' ? '#ff0000' : '#fff';
+      document.getElementById('yellowLight').style.backgroundColor = currentSignal === 'yellow' ? '#ffff00' : '#fff';
+      document.getElementById('greenLight').style.backgroundColor = currentSignal === 'green' ? '#00ff00' : '#fff';
+    }
+
+    function startTimer() {
+      timer = 30;
+      document.getElementById('timer').textContent = 'Timer: ' + timer;
+
+      intervalId = setInterval(function() {
+        timer--;
+        document.getElementById('timer').textContent = 'Timer: ' + timer;
+
+        if (timer === 0) {
+          toggleTrafficLight();
+        }
+      }, 1000);
+    }
+
+    // Initial setup
+    updateTrafficLight();
+    startTimer();
+  </script>
+</body>
+</html>
