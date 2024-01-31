@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #gameBoard {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      border: 2px solid #ccc;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .cell:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="gameBoard"></div>
+
+  <script>
+    let board = ['', '', '', '', '', '', '', '', ''];
+    let userTurn = true;
+
+    function renderBoard() {
+      const gameBoard = document.getElementById('gameBoard');
+      gameBoard.innerHTML = '';
+
+      for (let i = 0; i < board.length; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.dataset.index = i;
+        cell.textContent = board[i];
+        cell.addEventListener('click', handleCellClick);
+        gameBoard.appendChild(cell);
+      }
+    }
+
+    function handleCellClick(event) {
+      if (userTurn) {
+        const index = event.target.dataset.index;
+        if (board[index] === '') {
+          board[index] = 'X';
+          userTurn = false;
+          renderBoard();
+          checkWinner();
+          setTimeout(computerMove, 500);
+        }
+      }
+    }
+
+    function computerMove() {
+      const emptyCells = board.reduce((acc, cell, index) => {
+        if (cell === '') {
+          acc.push(index);
+        }
+        return acc;
+      }, []);
+
+      if (emptyCells.length > 0) {
+        const randomIndex = Math.floor(Math.random() * emptyCells.length);
+        const computerIndex = emptyCells[randomIndex];
+        board[computerIndex] = 'O';
+        userTurn = true;
+        renderBoard();
+        checkWinner();
+      }
+    }
+
+    function checkWinner() {
+      const winningCombinations = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+        [0, 4, 8], [2, 4, 6]             // Diagonals
+      ];
+
+      for (const combination of winningCombinations) {
+        const [a, b, c] = combination;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+          alert(`${board[a]} wins!`);
+          resetGame();
+          return;
+        }
+      }
+
+      if (!board.includes('')) {
+        alert('It\'s a draw!');
+        resetGame();
+      }
+    }
+
+    function resetGame() {
+      board = ['', '', '', '', '', '', '', '', ''];
+      userTurn = true;
+      renderBoard();
+    }
+
+    document.addEventListener('DOMContentLoaded', renderBoard);
+  </script>
+</body>
+</html>
