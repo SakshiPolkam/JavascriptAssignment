@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>
+        How to zoom-in and zoom-out
+        image using JavaScript 
+    </title>
+ 
+    <script src=
+"https://code.jquery.com/jquery-1.12.4.min.js">
+    </script>
+</head>
+ 
+<body style="text-align:center;">
+ 
+    <h1 style="color:rgb(23, 203, 209);">
+        Javascript
+    </h1>
+ 
+    <h3>
+        JavaScript - zoom in and zoom out of image
+    </h3>
+    <hr>
+ 
+    <div class="box">
+ 
+        <img src="https://platinumlist.net/guide/wp-content/uploads/2023/03/IMG-worlds-of-adventure.webp" id="zoom" GFG="250" alt="a">
+    </div>
+    <hr>
+ 
+    <button type="button" onclick="zoomin()">
+        Zoom-In
+    </button>
+ 
+    <button type="button" onclick="zoomout()">
+        Zoom-Out
+    </button>
+ 
+    <script type="text/javascript">
+        function zoomin() {
+            let GFG = document.getElementById("zoom");
+            let currWidth = GFG.clientWidth;
+            GFG.style.width = (currWidth + 100) + "px";
+        }
+ 
+        function zoomout() {
+            let GFG = document.getElementById("zoom");
+            let currWidth = GFG.clientWidth;
+            GFG.style.width = (currWidth - 100) + "px";
+        } 
+    </script>
+</body>
+ 
+</html>
