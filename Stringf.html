@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Functions Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 300px;
+            padding: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1><b>String Functions</b></h1>
+<label for="inputString"><h2><b>Enter a String:</b></h2></label>
+<input type="text" id="inputString">
+
+<button onclick="showResults()"><b>Show Results</b></button>
+
+<div id="result"></div>
+
+<script>
+    function showResults() {
+        var inputString = document.getElementById("inputString").value;
+        var resultDiv = document.getElementById("result");
+
+        resultDiv.innerHTML = "<strong>Original String:</strong> " + inputString + "<br><br>";
+
+        resultDiv.innerHTML += "<strong>charAt(0):</strong> " + inputString.charAt(0) + "<br>";
+        resultDiv.innerHTML += "<strong>charCodeAt(0):</strong> " + inputString.charCodeAt(0) + "<br>";
+        resultDiv.innerHTML += "<strong>concat(' World'):</strong> " + inputString.concat(" World") + "<br>";
+        resultDiv.innerHTML += "<strong>indexOf('o'):</strong> " + inputString.indexOf('o') + "<br>";
+        resultDiv.innerHTML += "<strong>lastIndexOf('o'):</strong> " + inputString.lastIndexOf('o') + "<br>";
+        resultDiv.innerHTML += "<strong>slice(1, 4):</strong> " + inputString.slice(1, 4) + "<br>";
+        resultDiv.innerHTML += "<strong>substring(1, 4):</strong> " + inputString.substring(1, 4) + "<br>";
+        resultDiv.innerHTML += "<strong>toUpperCase():</strong> " + inputString.toUpperCase() + "<br>";
+        resultDiv.innerHTML += "<strong>toLowerCase():</strong> " + inputString.toLowerCase() + "<br>";
+        resultDiv.innerHTML += "<strong>trim():</strong> " + inputString.trim() + "<br>";
+
+        var words = inputString.split(' ');
+        resultDiv.innerHTML += "<strong>split(' '):</strong> " + words.join(', ') + "<br>";
+
+    }
+</script>
+</body>
+</html>
