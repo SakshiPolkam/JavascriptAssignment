@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Formatting Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #formattedText {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      display: inline-block;
+    }
+
+    textarea {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <label for="textInput">Enter text:</label>
+    <textarea id="textInput" rows="4" cols="50"></textarea>
+  </div>
+
+  <div>
+    <h3>Text Formatting Options:</h3>
+    <label><input type="checkbox" id="boldCheckbox"> Bold</label>
+    <label><input type="checkbox" id="italicCheckbox"> Italic</label>
+    <label for="fontSize">Font Size: <input type="number" id="fontSize" min="1" max="100" value="16"></label>
+    <label for="fontType">Font Type: <input type="text" id="fontType" placeholder="e.g., Arial"></label>
+    <label><input type="checkbox" id="underlineCheckbox"> Underline</label>
+    <label><input type="checkbox" id="borderCheckbox"> Border</label>
+    <label for="textShadow">Text Shadow: <input type="text" id="textShadow" placeholder="e.g., 2px 2px 4px #000"></label>
+    <label for="lineSpacing">Line Spacing: <input type="number" id="lineSpacing" min="0" max="5" step="0.1" value="1"></label>
+    <label for="bgColor">Background Color: <input type="color" id="bgColor"></label>
+    <label for="textColor">Text Color: <input type="color" id="textColor"></label>
+  </div>
+
+  <div>
+    <button onclick="applyFormatting()">Apply Formatting</button>
+  </div>
+
+  <div id="formattedText" contenteditable="true"></div>
+
+  <script>
+    function applyFormatting() {
+      const formattedText = document.getElementById('formattedText');
+      const textInput = document.getElementById('textInput').value;
+
+      formattedText.innerHTML = textInput;
+
+      if (document.getElementById('boldCheckbox').checked) {
+        formattedText.style.fontWeight = 'bold';
+      } else {
+        formattedText.style.fontWeight = 'normal';
+      }
+
+      if (document.getElementById('italicCheckbox').checked) {
+        formattedText.style.fontStyle = 'italic';
+      } else {
+        formattedText.style.fontStyle = 'normal';
+      }
+
+      const fontSize = document.getElementById('fontSize').value;
+      formattedText.style.fontSize = fontSize + 'px';
+
+      const fontType = document.getElementById('fontType').value;
+      formattedText.style.fontFamily = fontType;
+
+      if (document.getElementById('underlineCheckbox').checked) {
+        formattedText.style.textDecoration = 'underline';
+      } else {
+        formattedText.style.textDecoration = 'none';
+      }
+
+      if (document.getElementById('borderCheckbox').checked) {
+        formattedText.style.border = '1px solid #000';
+      } else {
+        formattedText.style.border = 'none';
+      }
+
+      const textShadow = document.getElementById('textShadow').value;
+      formattedText.style.textShadow = textShadow;
+
+      const lineSpacing = document.getElementById('lineSpacing').value;
+      formattedText.style.lineHeight = lineSpacing;
+
+      const bgColor = document.getElementById('bgColor').value;
+      formattedText.style.backgroundColor = bgColor;
+
+      const textColor = document.getElementById('textColor').value;
+      formattedText.style.color = textColor;
+    }
+  </script>
+</body>
+</html>
